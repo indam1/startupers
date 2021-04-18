@@ -1,0 +1,381 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_message/manage
+
+
+    Example context (json):
+    {
+
+    }
+}}
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        max-width: 2000px;
+    }
+
+    .container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .container .im {
+        position: absolute;
+        top: 87%;
+        left: 82%;
+        width: 12%;
+    }
+
+    .container .btn {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: #fbaf83;
+        color: white;
+        cursor: pointer;
+        border-radius: 100%;
+    }
+
+    .container .btn1 {
+        top: 94.5%;
+        left: 18.4%;
+        padding: 20px;
+        background-color: #40EBD2;
+    }
+
+    .container .btn2 {
+        top: 89%;
+        left: 20.5%;
+        padding: 12px;
+    }
+
+    .container .btn3 {
+        top: 88.3%;
+        left: 23.8%;
+        padding: 12px;
+    }
+
+    .container .btn4 {
+        top: 82.3%;
+        left: 24.6%;
+        padding: 12px;
+        background-color: #6D3F8F;
+    }
+
+    .container .btn5 {
+        top: 84.19%;
+        left: 27.6%;
+        padding: 12px;
+    }
+
+    .container .btn6 {
+        top: 79.21%;
+        left: 30.7%;
+        padding: 12px;
+    }
+
+    .container .btn7 {
+        top: 72.5%;
+        left: 32.7%;
+        padding: 12px;
+        background-color: #6D3F8F;
+    }
+
+    .container .btn8 {
+        top: 72.5%;
+        left: 36.3%;
+        padding: 12px;
+    }
+
+    .container .btn9 {
+        top: 66.5%;
+        left: 39.3%;
+        padding: 12px;
+    }
+
+    .container .btn10 {
+        top: 61.5%;
+        left: 36.35%;
+        padding: 20px;
+        background-color: #40EBD2;
+    }
+
+    .container .btn11 {
+        top: 46.4%;
+        left: 29%;
+        padding: 12px;
+    }
+
+    .container .btn12 {
+        top: 43.6%;
+        left: 24.6%;
+        padding: 12px;
+        background-color: #6D3F8F;
+    }
+
+    .container .btn:hover {
+        background-color: red;
+    }
+
+    .container2, .container3, .container4 {
+        display: none;
+    }
+
+    .container2 .b1, .container2 .b2, .container2 .b3  {
+        display: none;
+    }
+
+    .container3 .c1, .container3 .c2, .container3 .c3 {
+        display: none;
+    }
+
+    .container4 .d1, .container4 .d2, .container4 .d3 {
+        display: none;
+    }
+
+    .container2 .im, .container3 .im, .container4 .im {
+        display: none;
+    }
+
+    .container2 .backToMap {
+        position: absolute;
+        top: 4.6%;
+        left: 6.6%;
+        width: 11%;
+        height: auto;
+    }
+
+    .container3 .backToMap {
+        position: absolute;
+        top: 4.7%;
+        left: 7.2%;
+        width: 11%;
+        height: auto;
+    }
+
+    .container4 .backToMap {
+        position: absolute;
+        top: 5.1%;
+        left: 6.4%;
+        width: 11%;
+        height: auto;
+    }
+
+    .container2 .backToPA {
+        position: absolute;
+        top: 4.6%;
+        left: 84.2%;
+        width: 13%;
+        height: auto;
+    }
+
+    .container3 .backToPA {
+        position: absolute;
+        top: 4.7%;
+        left: 84%;
+        width: 13%;
+        height: auto;
+    }
+
+    .container4 .backToPA {
+        position: absolute;
+        top: 5.1%;
+        left: 84.2%;
+        width: 13%;
+        height: auto;
+    }
+
+</style>
+
+
+
+<script>
+    let mainName, mainId;
+    let goalCounter = [2, 2, 1, 0, 0, 0, 0, 0, 0, 0];
+    let currentCounter = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let level = [['lvl1_a', 'lvl1_b', 'lvl1_c'],
+                ['lvl2_a', 'lvl2_b', 'lvl2_c'],
+                ['lvl3_a', 'lvl3_b', 'lvl3_c']];
+
+    function chooseLevelToLvl(name, id) {
+        let mainLvl = 'emp';
+        let firstImg;
+        let button;
+        mainName = name;
+        mainId = id;
+        document.getElementById('chooseLvl').style.display = "none";
+        switch (mainId) {
+            case '7': { // Need to enter right id of moodle module
+                mainLvl = 'lvl1';
+                firstImg = 'lvl1_a';
+                button = "btn_1";
+                break;
+            }
+            case '8': { // Need to enter right id of moodle module
+                mainLvl = 'lvl2';
+                firstImg = 'lvl2_a';
+                button = "btn_2";
+                break;
+            }
+            case '9': { // Need to enter right id of moodle module
+                mainLvl = 'lvl3';
+                firstImg = 'lvl3_a';
+                button = "btn_3";
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        if (mainLvl != 'emp') {
+            document.getElementById(mainLvl).style.display = "block";
+            document.getElementById(firstImg).style.display = "block";
+            document.getElementById(button).style.display = "block";
+        }
+        else {
+            location.href = '/mod/' + mainName + '/view.php?id=' + mainId;
+        }
+    }
+
+    function showAnotherPicture(index) {
+        let firstImg, lastImg;
+        switch (index) {
+            case 0: {
+                switch (currentCounter[index]) {
+                    case 0: {
+                        firstImg = 'lvl1_a';
+                        lastImg = 'lvl1_b';
+                        break;
+                    }
+                    case 1: {
+                        firstImg = 'lvl1_b';
+                        lastImg = 'lvl1_c';
+                        break;
+                    }
+                    case 2: {
+                        firstImg = 'lvl1_c'
+                        break;
+                    }
+                }
+            }
+                break;
+            case 1: {
+                switch (currentCounter[index]) {
+                    case 0: {
+                        firstImg = 'lvl2_a';
+                        lastImg = 'lvl2_b';
+                        break;
+                    }
+                    case 1: {
+                        firstImg = 'lvl2_b';
+                        lastImg = 'lvl2_c';
+                        break;
+                    }
+                    case 2: {
+                        firstImg = 'lvl2_c'
+                        break;
+                    }
+                }
+            }
+                break;
+            case 2: {
+                switch (currentCounter[index]) {
+                    case 0: {
+                        firstImg = 'lvl3_a';
+                        lastImg = 'lvl3_b';
+                        break;
+                    }
+                    case 1: {
+                        firstImg = 'lvl3_b';
+                        lastImg = 'lvl3_c';
+                        break;
+                    }
+                    case 2: {
+                        firstImg = 'lvl3_c'
+                        break;
+                    }
+                }
+            }
+                break;
+        }
+        if (currentCounter[index] < goalCounter[index]) {
+            document.getElementById(lastImg).style.display = "block";
+            document.getElementById(firstImg).style.display = "none";
+        }
+        else {
+            location.href = '/mod/' + mainName + '/view.php?id=' + mainId;
+        }
+        currentCounter[index]++;
+    }
+
+    function backToMap(map, index) {
+        for(let i = currentCounter[index]; i >= 0; i--) {
+            document.getElementById(level[index][i]).style.display = "none";
+        }
+        currentCounter[index] = 0;
+        document.getElementById('chooseLvl').style.display = "block";
+        document.getElementById(map).style.display = "none";
+    }
+
+    function backToPA() {
+        location.href="/my/";
+    }
+</script>
+
+<div id='chooseLvl' class="container container1">
+    <img id='chooseLvl_a' class='chooseLvl_a' src="/mod/activitymap/pix/sv2.png">
+    {{#modules}}
+        <button class="btn btn{{number}}" name="{{number}}But" value="arrayBut[{{number}}]"
+                onclick="chooseLevelToLvl('{{name}}', '{{id}}')"></button>
+    {{/modules}}
+</div>
+
+<div id='lvl1' class="container container2">
+    <img class="backToMap" onclick="backToMap('lvl1', 0)" src="/mod/activitymap/pix/button.png">
+    <img class="backToPA" onclick="backToPA()" src="/mod/activitymap/pix/button2.png">
+    <img id="lvl1_a" class='b1' src="/mod/activitymap/pix/1.png">
+    <img id="lvl1_b" class='b2' src="/mod/activitymap/pix/1_2.png">
+    <img id="lvl1_c" class='b3' src="/mod/activitymap/pix/1_3.png">
+    <img id="btn_1" class="im" onclick="showAnotherPicture(0)" src="/mod/activitymap/pix/button3.png">
+
+</div>
+
+<div id='lvl2' class="container container3">
+    <img class="backToMap" onclick="backToMap('lvl2', 1)" src="/mod/activitymap/pix/button.png">
+    <img class="backToPA" onclick="backToPA()" src="/mod/activitymap/pix/button2.png">
+    <img id="lvl2_a" class='c1' src="/mod/activitymap/pix/2.png">
+    <img id="lvl2_b" class='c2' src="/mod/activitymap/pix/2_2.png">
+    <img id="lvl2_c" class='c3' src="/mod/activitymap/pix/2_3.png">
+    <img id="btn_2" class="im" onclick="showAnotherPicture(1)" src="/mod/activitymap/pix/button3.png">
+</div>
+
+<div id='lvl3' class="container container4">
+    <img class="backToMap" onclick="backToMap('lvl3', 2)" src="/mod/activitymap/pix/button.png">
+    <img class="backToPA" onclick="backToPA()" src="/mod/activitymap/pix/button2.png">
+    <img id="lvl3_a" class='d1' src="/mod/activitymap/pix/3_1.png">
+    <img id="lvl3_b" class='d2' src="/mod/activitymap/pix/3_2.png">
+    <img id="lvl3_c" class='d3' src="/mod/activitymap/pix/3_2.png">
+    <img id="btn_3" class="im" onclick="showAnotherPicture(2)" src="/mod/activitymap/pix/button3.png">
+</div>
+
+
+
+
+
